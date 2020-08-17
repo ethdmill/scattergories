@@ -24,7 +24,7 @@ export default function ListGenerator () {
   return (
     <div>
       <div>
-        {list?.map((listItem) => <div>{listItem}</div>)}
+        {list?.map((listItem, index) => <div key={index.toString()}>{listItem}</div>)}
       </div>
       <div>
         <button onClick={() => handleClick()}>Generate a list!</button>
