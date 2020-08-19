@@ -23,10 +23,10 @@ export default function ListGenerator () {
 
   return (
     <div>
-      <div>
+      <div className="listWrapper">
         {list?.map((listItem, index) => <div key={index.toString()}>{listItem}</div>)}
       </div>
-      <div>
+      <div className="userInputWrapper">
         <button onClick={() => handleClick()}>Generate a list!</button>
       </div>
     </div>
