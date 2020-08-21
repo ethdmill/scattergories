@@ -15,7 +15,6 @@ function Home() {
 
 export default function App() {
   return (
-
     <>
       <Router>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4 justify-content-center">

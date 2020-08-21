@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as http from 'http';
 import * as socketio from 'socket.io';
 import generateList from './generateList'
+import Timer from './timer'
 
 const expressServer = express();
 
@@ -21,6 +22,9 @@ lobbyIO.on('connection', (client) => {
 
     client.on('generate_list', () => {
         lobbyIO.emit('list_generated', generateList());
+        Timer().then(() => {
+            lobbyIO.emit('timer_ended')
+        })
     });
 
     client.on('disconnect', () => {

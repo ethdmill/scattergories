@@ -17,7 +17,7 @@ function RenderAllInputs() {
   return inputs
 }
 
-export default function UserInputs () {
+export default function UserInputs(_props: {disabled: boolean}) {
   return (
     <form>
       {RenderAllInputs()}

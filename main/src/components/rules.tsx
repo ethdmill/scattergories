@@ -2,6 +2,7 @@ import React from 'react'
 
 export default function Rules() {
   return (
+    //TODO: update rules from placeholders
     <div className="text-center">
       <h2 className="pt-5 my-5">DA RULES</h2>
       <ul className="list-group">
