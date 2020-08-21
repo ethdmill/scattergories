@@ -7,8 +7,10 @@ export default function ListGenerator () {
   const [list, setList] = React.useState<string[]>()
   const [connection, setConnection] = React.useState<typeof Socket>()
   const [timeRemaining, setTimeRemaining] = React.useState<number>(180)
-  const [disabled, setDisabled] = React.useState<boolean>(false)
+  const [disableInputs, setDisableInputs] = React.useState<boolean>(true)
+  const [disableStartButton, setDisableStartButton] = React.useState<boolean>(false)
 
+  // initializes lobby and connects to list source file
   React.useEffect(
     () => {
       const connection = socketio('/lobby')
@@ -23,22 +25,36 @@ export default function ListGenerator () {
     []
   )
 
+  // disables user inputs when timer reaches 0
   React.useEffect(() => {
     if (timeRemaining == 0) {
-      setDisabled(true)
+      setDisableInputs(true)
     }
   }, [timeRemaining])
 
-  const countdownTimer = () => {
-    setInterval(() => {
-      setTimeRemaining(previousTimeRemaining => previousTimeRemaining - 1)
+  // starts and stops timer
+  const countdownTimer = (limit: number) => {
+    let i = 0;
+    let timer = setInterval(() => {
+      setTimeRemaining(prevTime => prevTime - 1)
+      if (i === limit - 1) {
+        clearInterval(timer)
+        setTimeRemaining(180)
+        setDisableStartButton(false)
+      }
+      i++
     }, 1000)
   }
 
+  // calls the following functions on button click
   const handleClick = () => {
     connection?.emit('generate_list')
-    setTimeRemaining(3)
-    countdownTimer()
+    setTimeout(() => {
+      setTimeRemaining(3)
+      countdownTimer(3)
+      setDisableInputs(false)
+      setDisableStartButton(true)
+    }, 0)
   }
 
   return (
@@ -47,13 +63,13 @@ export default function ListGenerator () {
         {list?.map((listItem, index) => <div key={index.toString()}>{listItem}</div>)}
       </div>
       <div className="userInputWrapper">
-        <button onClick={() => handleClick()}>Start the game!</button>
+        <button id="startButton" onClick={() => handleClick()} disabled={disableStartButton}>Start the game!</button>
       </div>
       <div>
         <Timer time={timeRemaining} />
       </div>
       <div>
-        <UserInputs disabled={disabled} />
+        <UserInputs disabled={disableInputs} />
       </div>
     </div>
   )
