@@ -1,15 +1,6 @@
 import React from 'react'
 
 //TODO: render checkboxes to the right of each input field, set state that determines points, clear with a new round
-// function RenderCheckboxes() {
-//   return (
-//     <span>
-//       <form>
-//         <input type="checkbox"></input>
-//       </form>
-//     </span>
-//   )
-// }
 
 function RenderSingleInput(props: {i: number, disabled: boolean}) {
   let label = (props.i < 9) ? `0${props.i + 1}` : `${props.i + 1}`
@@ -17,7 +8,8 @@ function RenderSingleInput(props: {i: number, disabled: boolean}) {
     <div>
       <label>{label}) </label>
       <input type="text" id={`input${label}`} disabled={props.disabled}></input>
-      {/* <RenderCheckboxes /> */}
+      <input type="checkbox"></input>
+      <input type="checkbox"></input>
     </div>
   )
 }

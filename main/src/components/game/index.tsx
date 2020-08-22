@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ListGenerator from './listGenerator'
 import AcceptableAnswers from '../acceptableAnswers'
-import UserInputs from './userInputs'
 
 export default function Game() {
+  const [showAcceptableAnswers, setShowAcceptableAnswers] = useState<boolean>(true)
+
   return(
     <>
       <ListGenerator />
-      <AcceptableAnswers />
+      <div>
+        <button onClick={() => setShowAcceptableAnswers(!showAcceptableAnswers)}>Acceptable Answers</button>
+        {showAcceptableAnswers && <AcceptableAnswers />}
+      </div>
     </>
   )
 }
