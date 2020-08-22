@@ -13,6 +13,7 @@ function Home() {
   )
 }
 
+//TODO: fix navbar
 export default function App() {
   return (
     <>

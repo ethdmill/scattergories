@@ -9,6 +9,7 @@ export default function ListGenerator () {
   const [timeRemaining, setTimeRemaining] = React.useState<number>(180)
   const [disableInputs, setDisableInputs] = React.useState<boolean>(true)
   const [disableStartButton, setDisableStartButton] = React.useState<boolean>(false)
+  const [disableGenerateButton, setDisableGenerateButton] = React.useState<boolean>(false)
 
   // initializes lobby and connects to list source file
   React.useEffect(
@@ -41,20 +42,24 @@ export default function ListGenerator () {
         clearInterval(timer)
         setTimeRemaining(180)
         setDisableStartButton(false)
+        setDisableGenerateButton(false)
       }
       i++
     }, 1000)
   }
 
-  // calls the following functions on button click
-  const handleClick = () => {
+  // on button click -- generates a category list
+  const handleGenerateClick = () =>{ 
     connection?.emit('generate_list')
-    setTimeout(() => {
-      setTimeRemaining(3)
-      countdownTimer(3)
-      setDisableInputs(false)
-      setDisableStartButton(true)
-    }, 0)
+  }
+
+  // on button click -- sets time remaining, starts timer, enables inputs, disables start/generate buttons
+  const handleStartClick = () => {
+    setTimeRemaining(3)
+    countdownTimer(3)
+    setDisableInputs(false)
+    setDisableStartButton(true)
+    setDisableGenerateButton(true)
   }
 
   return (
@@ -62,13 +67,16 @@ export default function ListGenerator () {
       <div className="listWrapper">
         {list?.map((listItem, index) => <div key={index.toString()}>{listItem}</div>)}
       </div>
-      <div className="userInputWrapper">
-        <button id="startButton" onClick={() => handleClick()} disabled={disableStartButton}>Start the game!</button>
+      <div>
+        <button className="listGenerateButton" onClick={() => handleGenerateClick()} disabled={disableGenerateButton}>Generate a list!</button>
+      </div>
+      <div>
+        <button id="startButton" onClick={() => handleStartClick()} disabled={disableStartButton}>Start the game!</button>
       </div>
       <div>
         <Timer time={timeRemaining} />
       </div>
-      <div>
+      <div className="userInputWrapper">
         <UserInputs disabled={disableInputs} />
       </div>
     </div>
