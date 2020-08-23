@@ -64,8 +64,8 @@ export default function StartGame () {
   // on button click -- sets time remaining, starts timer, enables inputs, disables start/list/letter buttons
   const handleStartClick = () => {
     connection?.emit('generate_letter')
-    setTimeRemaining(3)
-    countdownTimer(3)
+    setTimeRemaining(5)
+    countdownTimer(5)
     setDisableInputs(false)
     setDisableStartButton(true)
     setDisableGenerateButton(true)
