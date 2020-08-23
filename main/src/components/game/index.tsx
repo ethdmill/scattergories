@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ListGenerator from './listGenerator'
+import StartGame from './startGame'
 import AcceptableAnswers from '../acceptableAnswers'
 
 export default function Game() {
@@ -7,7 +7,7 @@ export default function Game() {
 
   return(
     <>
-      <ListGenerator />
+      <StartGame />
       <div>
         <button onClick={() => setShowAcceptableAnswers(!showAcceptableAnswers)}>Acceptable Answers</button>
         {showAcceptableAnswers && <AcceptableAnswers />}

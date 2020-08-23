@@ -1,6 +1,9 @@
 import React from 'react'
 import './App.css'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 import Game from './components/game'
 import Rules from './components/rules'
 
@@ -17,12 +20,14 @@ function Home() {
 export default function App() {
   return (
     <>
+      <Navbar bg="dark" variant="dark">
+        <Nav className="mr-auto">
+          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href="/game">Play</Nav.Link>
+          <Nav.Link href="/rules">Rules</Nav.Link>
+        </Nav>
+      </Navbar>
       <Router>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4 justify-content-center">
-          <li className="nav-link"><Link to='/'>Home</Link></li>
-          <li className="nav-link"><Link to='/game'>Play</Link></li>
-          <li className="nav-link"><Link to='/rules'>Rules</Link></li>
-        </nav>
         <Route path='/' exact component={Home} />
         <Route path='/game' exact component={Game} />
         <Route path='/rules' exact component={Rules} />

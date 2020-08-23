@@ -20,6 +20,6 @@
     "jsx": "react"
   },
   "include": [
-    "src", "../server/timer.ts"
+    "src", "../server/game_functions/timer.ts"
   ]
 }
