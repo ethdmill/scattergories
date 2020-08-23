@@ -36,7 +36,7 @@ export default function StartGame () {
 
   // disables user inputs when timer reaches 0
   React.useEffect(() => {
-    if (timeRemaining == 0) {
+    if (timeRemaining === 0) {
       setDisableInputs(true)
     }
   }, [timeRemaining])
