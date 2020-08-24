@@ -6,12 +6,13 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Scattergories from './components/game'
 import Rules from './components/rules/rules'
+import UpcomingFeatures from './components/upcoming/upcomingFeatures'
 
 function Home() {
   return(
     <div>
       <div className="text-center">
-        <h1 className="py-4">Welcome to Scattergories!</h1>
+        <h1 className="py-4 mt-2">Welcome to Scattergories!</h1>
         <h4>Please select an option above.</h4>
       </div>
       <div className="ml-1 fixed-bottom">
@@ -30,12 +31,14 @@ export default function App() {
           <Nav.Link href="/" className="mx-3">Home</Nav.Link>
           <Nav.Link href="/game" className="mx-3">Play</Nav.Link>
           <Nav.Link href="/rules" className="mx-3">Rules</Nav.Link>
+          <Nav.Link href="/upcoming" className="mx-3">Upcoming Features</Nav.Link>
         </Nav>
       </Navbar>
       <Router>
         <Route path='/' exact component={Home} />
         <Route path='/game' exact component={Scattergories} />
         <Route path='/rules' exact component={Rules} />
+        <Route path='/upcoming' exact component={UpcomingFeatures} />
       </Router>
     </>
   )
