@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import StartGame from './startGame'
+import Game from './game'
 import AcceptableAnswers from '../rules/acceptableAnswers'
 
-export default function Game() {
+export default function Scattergories() {
+
+  // sets state to show/hide acceptable answer rules
   const [showAcceptableAnswers, setShowAcceptableAnswers] = useState<boolean>(false)
 
   return(
     <>
-      <StartGame />
+      <Game />
       <div>
         <button onClick={() => setShowAcceptableAnswers(!showAcceptableAnswers)}>Need help?</button>
         {showAcceptableAnswers && <AcceptableAnswers />}

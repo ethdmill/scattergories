@@ -1,42 +1,40 @@
 import React from 'react'
+import { SubmittedAnswer } from './game'
 
-interface SubmittedAnswer {
-  input: string,
-  correct: boolean
-}
+// render for a single input field
+const SingleInput = (props: {submittedAnswer: SubmittedAnswer, index: number, disabled: boolean, onChange: (index: number) => void, handleText: (input: string, index: number) => void}) => {
+  let label = (props.index < 9) ? `0${props.index + 1}` : `${props.index + 1}`
 
-// const SingleInput = (props: {submittedAnswer: SubmittedAnswer, i: number, disabled: boolean, onChange: void}) => {
-const SingleInput = (props: {submittedAnswer: SubmittedAnswer, i: number, disabled: boolean}) => {
-  let label = (props.i < 9) ? `0${props.i + 1}` : `${props.i + 1}`
+  // targets user input for each input field and stores it in state
+  const onTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.handleText(event.target.value, props.index)
+  }
+
   return (
     <div>
-      <label className="ml-1 mr-2">{label}) </label>
-      <input type="text" id={`input${label}`} disabled={props.disabled}></input>
-      <input type="checkbox" className="ml-2 mr-1" id="goodAnswer"></input>
+      <label>{label})</label>
+      <input type="text" value={props.submittedAnswer.userInput} id={`input${label}`} disabled={props.disabled} onChange={onTextChange}></input>
+      <input type="checkbox" id="answerCheckbox" checked={props.submittedAnswer.correct} onChange={() => props.onChange(props.index)}></input>
     </div>
   )
 }
 
-export default function UserInputs(props: {disabled: boolean}) {
-  const [answers, setAnswers] = React.useState<SubmittedAnswer[]>(Array.from({ length: 12 }))
-
-  // React.useEffect(() => {
-  //   setAnswers([])
-  // })
-
-  const handleCheck = (index: number) => {
-    let answer = answers[index]
-    answer.correct = !answer.correct
-    answers[index] = answer
-    setAnswers(answers)
-  }
+// render for all 12 inputs
+export default function UserInputs(props: {disabled: boolean, answers: SubmittedAnswer[], handleCheck: (index: number) => void, handleText: (input: string, index: number) => void}) {
+  
+  // game point system
+  const points = props.answers.reduce((acc, cur) => acc + (cur.correct ? 1 : 0), 0)
 
   return (
-    <form>
-      {answers.map((value, index) => {
-        // return <SingleInput submittedAnswer={value} i={index} key={index} disabled={props.disabled} onChange={handleCheck(index)} />
-        return <SingleInput submittedAnswer={value} i={index} key={index} disabled={props.disabled} />
-      })}
-    </form>
+    <div>
+      <form>
+        {props.answers.map((value, index) => {
+          return <SingleInput submittedAnswer={value} index={index} key={index} disabled={props.disabled} onChange={(index) => props.handleCheck(index)} handleText={props.handleText} />
+        })}
+      </form>
+      <h1>
+        Points: {points}
+      </h1>
+    </div>
   )
 }

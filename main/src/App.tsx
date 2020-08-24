@@ -1,10 +1,10 @@
 import React from 'react'
-import './App.css'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Game from './components/game'
+import Scattergories from './components/game'
 import Rules from './components/rules/rules'
 
 function Home() {
@@ -12,7 +12,7 @@ function Home() {
     <div>
       <div className="text-center">
         <h1 className="py-4">Welcome to Scattergories!</h1>
-        <h4>Please select an option above.</h4>   
+        <h4>Please select an option above.</h4>
       </div>
       <div className="ml-1 fixed-bottom">
         <div>I do not own Scattergories or any related properties.</div>
@@ -34,7 +34,7 @@ export default function App() {
       </Navbar>
       <Router>
         <Route path='/' exact component={Home} />
-        <Route path='/game' exact component={Game} />
+        <Route path='/game' exact component={Scattergories} />
         <Route path='/rules' exact component={Rules} />
       </Router>
     </>
