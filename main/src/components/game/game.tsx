@@ -102,34 +102,43 @@ export default function Game () {
     setAnswers(newText)
   }
 
+  // game point system
+  const points = answers.reduce((acc, cur) => acc + (cur.correct ? 1 : 0), 0)
+
   return (
     <div>
 
-      <div>
-        <div>
+      <div className="d-flex flew-row justify-content-center pt-4 pb-1">
+        <div className="px-3">
           <button onClick={() => handleGenerateListClick()} disabled={disableGenerateButton}>Generate a list!</button>
         </div>
-        <div>
+        <div className="px-3">
           <button onClick={() => handleStartClick()} disabled={disableStartButton}>Start the game!</button>
         </div>
       </div>
 
-      <div>
-        <div>
+      <div className="d-flex flew-row justify-content-center">
+        <div className="px-3">
           <Timer time={timeRemaining} />
         </div>
-        <div>
+        <div className="px-3">
           <h1>{letter}</h1>
         </div>
       </div>
 
-      <div>
-        <div>
-          {list?.map((listItem, index) => <div key={index.toString()}>{categoryLabels(index)}) {listItem}</div>)}
+      <div className="d-flex flew-row justify-content-center">
+        <div className="py-2">
+          {list?.map((listItem, index) => <div className="pb-2 mb-1" key={index.toString()}>{categoryLabels(index)}) {listItem}</div>)}
         </div>
         <div>
           <UserInputs disabled={disableInputs} answers={answers} handleCheck={handleCheck} handleText={handleText} />
         </div>
+      </div>
+
+      <div className="d-flex justify-content-center">
+        <h1>
+          Points: {points}
+        </h1>
       </div>
 
     </div>

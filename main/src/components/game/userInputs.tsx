@@ -13,28 +13,25 @@ const SingleInput = (props: {submittedAnswer: SubmittedAnswer, index: number, di
   return (
     <div>
       <label>{label})</label>
-      <input type="text" value={props.submittedAnswer.userInput} id={`input${label}`} disabled={props.disabled} onChange={onTextChange}></input>
-      <input type="checkbox" id="answerCheckbox" checked={props.submittedAnswer.correct} onChange={() => props.onChange(props.index)}></input>
+      <input className="mx-1 my-1" type="text" value={props.submittedAnswer.userInput} id={`input${label}`} disabled={props.disabled} onChange={onTextChange}></input>
+      <input type="checkbox" checked={props.submittedAnswer.correct} onChange={() => props.onChange(props.index)}></input>
     </div>
   )
 }
 
 // render for all 12 inputs
 export default function UserInputs(props: {disabled: boolean, answers: SubmittedAnswer[], handleCheck: (index: number) => void, handleText: (input: string, index: number) => void}) {
-  
-  // game point system
-  const points = props.answers.reduce((acc, cur) => acc + (cur.correct ? 1 : 0), 0)
-
   return (
     <div>
-      <form>
-        {props.answers.map((value, index) => {
-          return <SingleInput submittedAnswer={value} index={index} key={index} disabled={props.disabled} onChange={(index) => props.handleCheck(index)} handleText={props.handleText} />
-        })}
-      </form>
-      <h1>
-        Points: {points}
-      </h1>
+      <div className="d-flex flew-row justify-content-center">
+        <form>
+          {props.answers.map((value, index) => {
+            return <SingleInput submittedAnswer={value} index={index} key={index} disabled={props.disabled} onChange={(index) => props.handleCheck(index)} handleText={props.handleText} />
+          })}
+        </form>
+      </div>
+      <div className="d-flex justify-content-center">
+      </div>
     </div>
   )
 }
