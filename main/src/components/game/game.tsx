@@ -104,24 +104,34 @@ export default function Game () {
 
   return (
     <div>
-      <div className="listWrapper">
-        {list?.map((listItem, index) => <div key={index.toString()}>{categoryLabels(index)}) {listItem}</div>)}
-      </div>
+
       <div>
-        <button className="listGenerateButton" onClick={() => handleGenerateListClick()} disabled={disableGenerateButton}>Generate a list!</button>
+        <div>
+          <button onClick={() => handleGenerateListClick()} disabled={disableGenerateButton}>Generate a list!</button>
+        </div>
+        <div>
+          <button onClick={() => handleStartClick()} disabled={disableStartButton}>Start the game!</button>
+        </div>
       </div>
+
       <div>
-        <button id="startButton" onClick={() => handleStartClick()} disabled={disableStartButton}>Start the game!</button>
+        <div>
+          <Timer time={timeRemaining} />
+        </div>
+        <div>
+          <h1>{letter}</h1>
+        </div>
       </div>
+
       <div>
-        <Timer time={timeRemaining} />
+        <div>
+          {list?.map((listItem, index) => <div key={index.toString()}>{categoryLabels(index)}) {listItem}</div>)}
+        </div>
+        <div>
+          <UserInputs disabled={disableInputs} answers={answers} handleCheck={handleCheck} handleText={handleText} />
+        </div>
       </div>
-      <div className="letterWrapper">
-        <h1>{letter}</h1>
-      </div>
-      <div className="userInputWrapper">
-        <UserInputs disabled={disableInputs} answers={answers} handleCheck={handleCheck} handleText={handleText} />
-      </div>
+
     </div>
   )
 }

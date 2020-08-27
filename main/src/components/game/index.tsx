@@ -10,9 +10,16 @@ export default function Scattergories() {
   return(
     <>
       <Game />
-      <div>
+      <div >
+      <div className="text-center pt-3">
         <button onClick={() => setShowAcceptableAnswers(!showAcceptableAnswers)}>Need help?</button>
-        {showAcceptableAnswers && <AcceptableAnswers />}
+      </div>
+          
+      <div className="d-flex flex-row justify-content-center">
+        <div className="d-flex flex-column">
+          {showAcceptableAnswers && <AcceptableAnswers />}
+        </div>
+      </div>
       </div>
     </>
   )

@@ -12,7 +12,7 @@ function Home() {
   return(
     <div>
       <div className="text-center">
-        <h1 className="py-4 mt-2">Welcome to Scattergories!</h1>
+        <h1 className="py-4 mt-4">Welcome to Scattergories!</h1>
         <h4>Please select an option above.</h4>
       </div>
       <div className="ml-1 fixed-bottom">
@@ -27,11 +27,14 @@ export default function App() {
   return (
     <>
       <Navbar bg="dark" variant="dark">
-        <Nav className="m-auto">
+        {/* <Nav className="m-auto">
           <Nav.Link href="/" className="mx-3">Home</Nav.Link>
           <Nav.Link href="/game" className="mx-3">Play</Nav.Link>
           <Nav.Link href="/rules" className="mx-3">Rules</Nav.Link>
           <Nav.Link href="/upcoming" className="mx-3">Upcoming Features</Nav.Link>
+        </Nav> */}
+        <Nav className="m-auto">
+          <Nav.Link href="/">l</Nav.Link>
         </Nav>
       </Navbar>
       <Router>
