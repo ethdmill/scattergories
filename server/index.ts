@@ -1,4 +1,5 @@
 import * as express from "express";
+// @ts-ignore
 import * as http from "http";
 import * as socketio from "socket.io";
 import generateList from "./game_functions/generateList";
@@ -7,8 +8,10 @@ import generateLetter from "./game_functions/randomLetter";
 
 const expressServer = express();
 
+// @ts-ignore
 expressServer.use(express.static("../main/public"));
 
+// @ts-ignore
 expressServer.get("/hello", (req, res) => {
   res.send("World");
 });
@@ -37,6 +40,7 @@ lobbyIO.on("connection", (client) => {
   });
 });
 
-httpServer.listen(8080, () => {
+// @ts-ignore
+httpServer.listen(process.env.PORT || 8080, () => {
   console.log(`Server listening on port 8080`);
 });
