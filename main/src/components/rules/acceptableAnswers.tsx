@@ -4,7 +4,7 @@ import './rules.css'
 export default function AcceptableAnswers() {
   return(
     <div className="mt-4">
-      <h2 className="text-center mb-3">Rules for Acceptable Answers</h2>
+      <h3 className="text-center mb-3">Rules for Acceptable Answers</h3>
       <ul className="list-group list">
         <li className="my-1">Answers must fit their respective category.</li>
         <li className="my-1">The first word of your answer must begin with the key letter.</li>

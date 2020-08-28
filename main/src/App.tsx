@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Scattergories from './components/game'
 import Rules from './components/rules/rules'
-import UpcomingFeatures from './components/upcoming/upcomingFeatures'
+import Roadmap from './components/roadmap/roadmap'
 
 function Home() {
   return(
@@ -27,21 +27,18 @@ export default function App() {
   return (
     <>
       <Navbar bg="dark" variant="dark">
-        {/* <Nav className="m-auto">
+        <Nav className="m-auto">
           <Nav.Link href="/" className="mx-3">Home</Nav.Link>
           <Nav.Link href="/game" className="mx-3">Play</Nav.Link>
           <Nav.Link href="/rules" className="mx-3">Rules</Nav.Link>
-          <Nav.Link href="/upcoming" className="mx-3">Upcoming Features</Nav.Link>
-        </Nav> */}
-        <Nav className="m-auto">
-          <Nav.Link href="/">l</Nav.Link>
+          <Nav.Link href="/upcoming" className="mx-3">Roadmap</Nav.Link>
         </Nav>
       </Navbar>
       <Router>
         <Route path='/' exact component={Home} />
         <Route path='/game' exact component={Scattergories} />
         <Route path='/rules' exact component={Rules} />
-        <Route path='/upcoming' exact component={UpcomingFeatures} />
+        <Route path='/upcoming' exact component={Roadmap} />
       </Router>
     </>
   )

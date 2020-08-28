@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function UpcomingFeatures() {
+export default function Roadmap() {
   return (
     <>
       <div className="text-center">
-        <h2 className="pt-5 my-5">Upcoming Features</h2>
+        <h2 className="py-4 mt-4">Upcoming Features</h2>
         <ul className="list-group">
           <li className="my-1">multiplayer functionality</li>
           <li className="my-1">individual answer reveals</li>

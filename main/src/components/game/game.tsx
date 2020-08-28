@@ -2,7 +2,7 @@ import React from 'react'
 import socketio, { Socket } from 'socket.io-client'
 import Timer from './timer'
 import UserInputs from './userInputs'
-import { categoryLabels } from './utils'
+import './game.css'
 
 export interface SubmittedAnswer {
   userInput: string,
@@ -12,12 +12,12 @@ export interface SubmittedAnswer {
 export default function Game () {
 
   // various states for the whole game
-  const [list, setList] = React.useState<string[]>()
+  const [list, setList] = React.useState<string[]>([])
   const [letter, setLetter] = React.useState<string>()
   const [connection, setConnection] = React.useState<typeof Socket>()
   const [timeRemaining, setTimeRemaining] = React.useState<number>(180)
   const [disableInputs, setDisableInputs] = React.useState<boolean>(true)
-  const [disableStartButton, setDisableStartButton] = React.useState<boolean>(false)
+  const [disableStartButton, setDisableStartButton] = React.useState<boolean>(true)
   const [disableGenerateButton, setDisableGenerateButton] = React.useState<boolean>(false)
 
   // initial answer/point values and another default state
@@ -61,7 +61,6 @@ export default function Game () {
       if (i === limit - 1) {
         clearInterval(timer)
         setTimeRemaining(180)
-        setDisableStartButton(false)
         setDisableGenerateButton(false)
       }
       i++
@@ -71,6 +70,7 @@ export default function Game () {
   // on button click -- generates a category list
   const handleGenerateListClick = () =>{ 
     connection?.emit('generate_list')
+    setDisableStartButton(false)
   }
 
   // on button click -- sets time remaining, starts timer, enables inputs, disables start/list/letter buttons
@@ -107,7 +107,6 @@ export default function Game () {
 
   return (
     <div>
-
       <div className="d-flex flew-row justify-content-center pt-4 pb-1">
         <div className="px-3">
           <button onClick={() => handleGenerateListClick()} disabled={disableGenerateButton}>Generate a list!</button>
@@ -116,31 +115,20 @@ export default function Game () {
           <button onClick={() => handleStartClick()} disabled={disableStartButton}>Start the game!</button>
         </div>
       </div>
-
-      <div className="d-flex flew-row justify-content-center">
-        <div className="px-3">
+      <div className="d-flex flew-row justify-content-center py-2 info">
+        <div className="px-4">
+          <h2>Letter: {letter ? letter : "?"}</h2>
+        </div>
+        <div className="px-4">
           <Timer time={timeRemaining} />
         </div>
-        <div className="px-3">
-          <h1>{letter}</h1>
-        </div>
-      </div>
-
-      <div className="d-flex flew-row justify-content-center">
-        <div className="py-2">
-          {list?.map((listItem, index) => <div className="pb-2 mb-1" key={index.toString()}>{categoryLabels(index)}) {listItem}</div>)}
-        </div>
-        <div>
-          <UserInputs disabled={disableInputs} answers={answers} handleCheck={handleCheck} handleText={handleText} />
-        </div>
-      </div>
-
-      <div className="d-flex justify-content-center">
-        <h1>
+        <h2 className="px-4">
           Points: {points}
-        </h1>
+        </h2>
       </div>
-
+      <div className="d-flex flew-row justify-content-center">
+        <UserInputs disabled={disableInputs} answers={answers} handleCheck={handleCheck} handleText={handleText} prompts={list} />
+      </div>
     </div>
   )
 }

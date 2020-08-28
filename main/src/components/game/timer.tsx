@@ -7,7 +7,7 @@ export default function Timer(props: {time: number}) {
   return(
     //TODO: change this back to not be an H1 maybe?
     <div>
-      <h1>{minutesLeft}:{formattedSecondsLeft}</h1>
+      <h2>{minutesLeft}:{formattedSecondsLeft}</h2>
     </div>
   )
 }
